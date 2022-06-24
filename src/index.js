@@ -236,7 +236,7 @@ class Paragraph {
    */
   static get pasteConfig() {
     return {
-      tags: [ 'P' ]
+      tags: [ 'P', 'SPAN', 'DIV' ]
     };
   }
 
