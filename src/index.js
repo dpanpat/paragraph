@@ -164,10 +164,11 @@ class Paragraph {
    */
   onPaste(event) {
     const data = {
-      text: event.detail.data.innerHTML
+      text: event.detail.data.innerHTML.replace(/(\r\n|\n|\r)/g, "<br>")
     };
 
     this.data = data;
+    this.api.blocks.getBlockByIndex(0).dispatchChange()
   }
 
   /**
