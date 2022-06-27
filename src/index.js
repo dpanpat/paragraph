@@ -168,7 +168,6 @@ class Paragraph {
     };
 
     this.data = data;
-    this.api.blocks.getBlockByIndex(0).dispatchChange()
   }
 
   /**
