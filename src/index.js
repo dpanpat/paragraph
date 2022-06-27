@@ -168,6 +168,7 @@ class Paragraph {
     };
 
     this.data = data;
+    this.api.blocks.getBlockByIndex(0).dispatchChange()
   }
 
   /**
@@ -235,9 +236,7 @@ class Paragraph {
    */
   static get pasteConfig() {
     return {
-      patterns: {
-        test: /(.*)/
-      }
+      tags: ['P', 'DIV', 'SPAN', 'p', 'div', 'span']
     };
   }
 
