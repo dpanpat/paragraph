@@ -236,9 +236,7 @@ class Paragraph {
    */
   static get pasteConfig() {
     return {
-      patterns: {
-        everything: /(.*)/
-      }
+      tags: ['P', 'DIV', 'SPAN', 'p', 'div', 'span']
     };
   }
 
