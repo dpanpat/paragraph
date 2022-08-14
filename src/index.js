@@ -101,6 +101,7 @@ class Paragraph {
     if (!this.readOnly) {
       div.contentEditable = true;
       div.addEventListener('keyup', this.onKeyUp);
+      // div.addEventListener('paste', event => this.handlePaste(event));
     }
 
     return div;
@@ -164,13 +165,12 @@ class Paragraph {
    */
   onPaste(event) {
     const data = {
-      text: event.detail.data.innerHTML.replace(/(\r\n|\n|\r)/g, "<br>")
+      text: event.detail.data.innerHTML
     };
 
     this.data = data;
     this.api.blocks.getBlockByIndex(0).dispatchChange()
   }
-
   /**
    * Enable Conversion Toolbar. Paragraph can be converted to/from other tools
    */
@@ -236,7 +236,7 @@ class Paragraph {
    */
   static get pasteConfig() {
     return {
-      tags: ['P', 'DIV', 'SPAN', 'p', 'div', 'span']
+      tags: ['P']
     };
   }
 
