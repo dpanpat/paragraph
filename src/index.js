@@ -69,6 +69,29 @@ class Paragraph {
   }
 
   /**
+   * Paste handler for plain text
+   *
+   */
+
+  handlePaste(event){
+    let pastedData = (event.clipboardData || window.clipboardData).getData('text/html');
+    if(pastedData.trim() === ""){
+      let markerElement = document.createElement('p');
+      pastedData = event.clipboardData.getData('Text');
+      markerElement.innerHTML = pastedData.replace(/(?:\r\n|\r|\n)/g, '<br>');
+      if (window.getSelection) {
+        let selObj = window.getSelection();
+        let selRange = selObj.getRangeAt(0);
+        selRange.deleteContents();
+        selRange.insertNode(markerElement);
+        selObj.collapseToEnd()
+      }
+      event.stopPropagation()
+      event.preventDefault()
+    }
+  }
+
+  /**
    * Check if text content is empty and set empty string to inner html.
    * We need this because some browsers (e.g. Safari) insert <br> into empty contenteditanle elements
    *
@@ -101,7 +124,7 @@ class Paragraph {
     if (!this.readOnly) {
       div.contentEditable = true;
       div.addEventListener('keyup', this.onKeyUp);
-      // div.addEventListener('paste', event => this.handlePaste(event));
+      div.addEventListener('paste', event => this.handlePaste(event));
     }
 
     return div;
